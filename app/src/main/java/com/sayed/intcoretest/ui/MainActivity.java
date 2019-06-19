@@ -1,7 +1,9 @@
-package com.sayed.intcoretest;
+package com.sayed.intcoretest.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sayed.intcoretest.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -2,6 +2,8 @@ package com.sayed.intcoretest.app;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.sayed.intcoretest.BuildConfig;
 
 import retrofit2.Retrofit;
@@ -19,6 +21,8 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         initRetrofitInstance(); //init retrofit obj
+        FacebookSdk.sdkInitialize(getApplicationContext());//init facebook sdk
+        AppEventsLogger.activateApp(this);
     }
 
     //prepare singleton for retrofit

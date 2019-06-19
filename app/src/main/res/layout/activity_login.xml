@@ -3,18 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.login.LoginActivity">
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:textColor="@color/intcore_theme"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:text="@string/intcore_movies_app"/>
+    <android.support.v7.widget.CardView
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5dp"
+                android:layout_gravity="start"
+                android:textColor="@color/intcore_dark_gray"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:text="@string/you_can_login_now_and_show_the_recent_movies"/>
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnFacebookLogin"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
 </layout>

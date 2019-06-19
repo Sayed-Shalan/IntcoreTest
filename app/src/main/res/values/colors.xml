@@ -26,11 +26,11 @@
     <color name="gray_black">#606161</color>
     <color name="white_opacity">#EEFFFFFF</color>
 
-    <!--Wimo Colors-->
-    <color name="wimo_gray">#D8D8D8</color>
-    <color name="wimo_dark_gray">#9B9B9B</color>
-    <color name="wimo_theme">#00D146</color>
-    <color name="wimo_theme_alpha">#9900D146</color>
+    <!--intcore Colors-->
+    <color name="intcore_gray">#D8D8D8</color>
+    <color name="intcore_dark_gray">#9B9B9B</color>
+    <color name="intcore_theme">#35459c</color>
+    <color name="intcore_theme_alpha">#9935459c</color>
 
-    <color name="wimo_gray_f5">#F5F5F5</color>
+    <color name="intcore_gray_f5">#F5F5F5</color>
 </resources>

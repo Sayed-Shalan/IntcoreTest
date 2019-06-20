@@ -12,4 +12,16 @@
     <string name="continue_as">Continue as</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="privacy_policy">Privacy &amp; Policy</string>
+    <string name="about">About</string>
+    <string name="contact_us">Contact us</string>
+    <string name="logout">Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="movies">Movies</string>
+    <string name="list">List</string>
+    <string name="favourites">Favourites</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

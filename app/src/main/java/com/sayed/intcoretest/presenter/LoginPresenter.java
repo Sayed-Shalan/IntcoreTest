@@ -1,9 +1,11 @@
 package com.sayed.intcoretest.presenter;
 
+import com.facebook.AccessToken;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.sayed.intcoretest.repositories.LoginInteractor;
 import com.sayed.intcoretest.ui.login.LoginView;
+import com.sayed.intcoretest.utils.SPUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,13 @@ public class LoginPresenter implements LoginInteractor.OnLoginFinishedListener {
         // App code
         loginInteractor.getGraphResponseData(loginResult,this);
 
+    }
+
+    //check if user logged in
+    public void checkIfUserLoggedIn(SPUtils spUtils){
+        if (AccessToken.getCurrentAccessToken()!=null&&spUtils.getUser()!=null){
+            loginView.startHomeActivity();
+        }
     }
 
     @Override

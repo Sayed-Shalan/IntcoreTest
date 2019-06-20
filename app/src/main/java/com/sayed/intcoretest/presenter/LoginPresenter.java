@@ -30,7 +30,7 @@ public class LoginPresenter implements LoginInteractor.OnLoginFinishedListener {
     @Override
     public void onSuccess(JSONObject object, GraphResponse response) {
         try {
-            loginView.navigateToHome(object.getString("first_name").concat(" ").concat(object.getString("last_name")));
+            loginView.navigateToHome(object.getString("first_name"),object.getString("last_name"));
         } catch (JSONException e) {
             e.printStackTrace();
             loginView.showError();

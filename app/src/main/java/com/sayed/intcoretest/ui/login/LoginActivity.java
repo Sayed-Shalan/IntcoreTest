@@ -13,9 +13,13 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.sayed.intcoretest.R;
 import com.sayed.intcoretest.databinding.ActivityLoginBinding;
+import com.sayed.intcoretest.model.User;
+import com.sayed.intcoretest.other.OkCancelCallback;
 import com.sayed.intcoretest.presenter.LoginPresenter;
 import com.sayed.intcoretest.repositories.LoginInteractor;
 import com.sayed.intcoretest.ui.base.BaseActivity;
+import com.sayed.intcoretest.utils.AppUtils;
+import com.sayed.intcoretest.utils.SPUtils;
 
 public class LoginActivity extends BaseActivity implements LoginView, FacebookCallback<LoginResult> {
 
@@ -50,14 +54,26 @@ public class LoginActivity extends BaseActivity implements LoginView, FacebookCa
 
     //remove session
     private void checkIfUserLoggedIn() {
-        AccessToken accessToken=AccessToken.getCurrentAccessToken();
-        if (accessToken!=null) AccessToken.setCurrentAccessToken(null);
+        if (AccessToken.getCurrentAccessToken()!=null) AccessToken.setCurrentAccessToken(null);
     }
 
     /** Handle update view methods **/
     @Override
-    public void navigateToHome(String email) {
-        showSnackMsg(email);
+    public void navigateToHome(String first_name,String last_name) {
+        //open ok cancel dialog
+        AppUtils.buildOkCancelDialog(LoginActivity.this, getResources().getString(R.string.continue_as).concat(" ").concat(first_name).concat(" ").concat(last_name).concat("?"),
+                getResources().getString(R.string.ok), getResources().getString(R.string.cancel), new OkCancelCallback() {
+                    @Override
+                    public void onOkClick() {
+                        //save user data in preferences
+                        SPUtils spUtils=new SPUtils(LoginActivity.this);
+                        spUtils.setUser(new User(first_name,last_name));
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                    }
+                });
     }
 
     @Override

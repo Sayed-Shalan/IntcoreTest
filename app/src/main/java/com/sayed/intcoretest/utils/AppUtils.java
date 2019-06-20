@@ -1,10 +1,14 @@
 package com.sayed.intcoretest.utils;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.AlertDialog;
+
+import com.sayed.intcoretest.other.OkCancelCallback;
 
 public class AppUtils {
 
@@ -26,5 +30,27 @@ public class AppUtils {
             // navigate up to the logical parent activity.
             NavUtils.navigateUpTo(activity, upIntent);
         }
+    }
+
+    //open ok cancel Dialog
+    public static void buildOkCancelDialog(Activity activity, String title, String okStr, String cancelStr, OkCancelCallback okCancelCallback){
+        final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+        builder.setMessage(title)
+                .setCancelable(false)
+                .setPositiveButton(okStr, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        okCancelCallback.onOkClick();
+                    }
+                })
+                .setNegativeButton(cancelStr, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        okCancelCallback.onCancelClick();
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

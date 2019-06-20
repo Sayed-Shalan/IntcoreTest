@@ -18,6 +18,7 @@ import com.sayed.intcoretest.other.OkCancelCallback;
 import com.sayed.intcoretest.presenter.LoginPresenter;
 import com.sayed.intcoretest.repositories.LoginInteractor;
 import com.sayed.intcoretest.ui.base.BaseActivity;
+import com.sayed.intcoretest.ui.home.HomeActivity;
 import com.sayed.intcoretest.utils.AppUtils;
 import com.sayed.intcoretest.utils.SPUtils;
 
@@ -54,7 +55,14 @@ public class LoginActivity extends BaseActivity implements LoginView, FacebookCa
 
     //remove session
     private void checkIfUserLoggedIn() {
-        if (AccessToken.getCurrentAccessToken()!=null) AccessToken.setCurrentAccessToken(null);
+        presenter.checkIfUserLoggedIn(new SPUtils(LoginActivity.this));
+    }
+
+    //start home activity
+    @Override
+    public void startHomeActivity() {
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        finish();
     }
 
     /** Handle update view methods **/
@@ -68,6 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginView, FacebookCa
                         //save user data in preferences
                         SPUtils spUtils=new SPUtils(LoginActivity.this);
                         spUtils.setUser(new User(first_name,last_name));
+                        startHomeActivity();
                     }
 
                     @Override

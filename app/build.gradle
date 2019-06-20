@@ -30,19 +30,19 @@ android {
         dev {
             dimension "api"
             applicationId "com.sayed.intcoretest.dev"
-            buildConfigField "String", "HOST", "\"https://www.themoviedb.org\""
+            buildConfigField "String", "HOST", "\"http://api.themoviedb.org\""
         }
 
         stg {
             dimension "api"
             applicationId "com.sayed.intcoretest.stg"
-            buildConfigField "String", "HOST", "\"https://www.themoviedb.org\""
+            buildConfigField "String", "HOST", "\"http://api.themoviedb.org\""
         }
 
         production {
             dimension "api"
             applicationId "com.sayed.intcoretest"
-            buildConfigField "String", "HOST", "\"https://www.themoviedb.org\""
+            buildConfigField "String", "HOST", "\"http://api.themoviedb.org\""
         }
     }
 
@@ -60,6 +60,7 @@ dependencies {
             retrofit         : "2.3.0",
             okhttp           : "3.9.1",
             facebook         : "4.4.0",
+            glide            : "3.7.0",
 
     ]
 
@@ -68,6 +69,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${versions.support}"
     implementation "com.android.support:support-v4:${versions.support}"
     implementation "com.android.support:recyclerview-v7:${versions.support}"
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
     implementation "com.android.support:design:${versions.support}"
     implementation "com.android.support:cardview-v7:${versions.support}"
     implementation "com.android.support.constraint:constraint-layout:${versions.constraint_layout}"

@@ -37,20 +37,13 @@ public class AppUtils {
         final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
         builder.setMessage(title)
                 .setCancelable(false)
-                .setPositiveButton(okStr, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        okCancelCallback.onOkClick();
-                    }
-                })
-                .setNegativeButton(cancelStr, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        okCancelCallback.onCancelClick();
-                        dialog.cancel();
-                    }
+                .setPositiveButton(okStr, (dialog, which) -> okCancelCallback.onOkClick())
+                .setNegativeButton(cancelStr, (dialog, which) -> {
+                    okCancelCallback.onCancelClick();
+                    dialog.cancel();
                 });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
 }

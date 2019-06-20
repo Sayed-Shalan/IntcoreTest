@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppController extends Application {
 
     //Dec Fields
-    Retrofit retrofit;
+    static Retrofit retrofit;
 
     /** On App Created **/
     @Override
@@ -34,6 +34,6 @@ public class AppController extends Application {
     }
 
     //return retrofit
-    public Retrofit getRetrofit(){return retrofit;}
+    public static Retrofit getRetrofit(){return retrofit;}
 
 }

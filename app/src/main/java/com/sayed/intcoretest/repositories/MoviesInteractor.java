@@ -6,9 +6,6 @@ import com.sayed.intcoretest.app.AppController;
 import com.sayed.intcoretest.model.MoviesResult;
 import com.sayed.intcoretest.services.MoviesService;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +20,7 @@ public class MoviesInteractor {
             public void onResponse(Call<MoviesResult> call, Response<MoviesResult> response) {
                 if (response.isSuccessful()) {
                     Log.e("On Response","Succ");
-                    moviesListener.onFail();response.body();
+                    moviesListener.onSuccess(response.body());
 
                 } else {
                     Log.e("On Response","Err");

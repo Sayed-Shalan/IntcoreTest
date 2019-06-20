@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sayed.intcoretest.R;
 import com.sayed.intcoretest.databinding.FragmentMoviesBinding;
@@ -96,6 +97,8 @@ public class MoviesFragment extends Fragment implements MoviesView{
     public void onFail() {
         binding.swipeRefresh.setRefreshing(false);
 //        showError(getResources().getString(R.string.error_occurred));
+        Toast.makeText(getActivity(),getResources().getString(R.string.error_occurred),Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

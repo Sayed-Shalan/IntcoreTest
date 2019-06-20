@@ -34,8 +34,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.home.HomeActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"            />
 
         <!-- Providers -->
         <provider

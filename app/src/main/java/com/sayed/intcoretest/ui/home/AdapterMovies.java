@@ -21,7 +21,6 @@ public class AdapterMovies extends BaseAdapter {
     //dec data
     private MoviesCallback listener;
     private List<Movie> items;
-    private String posterImageUrl="https://image.tmdb.org/t/p/original";
 
     //constructor to init data
     public AdapterMovies(MoviesCallback listener, List<Movie> items) {
@@ -84,7 +83,7 @@ public class AdapterMovies extends BaseAdapter {
 
             //set image with caching
             Glide.with(getContext())
-                    .load(posterImageUrl.concat(movie.getPoster_path()))
+                    .load("http://image.tmdb.org/t/p/w185".concat(movie.getPoster_path()))
                     .into(binding.posterImage);
 
             binding.posterFavouriteButton.setColorFilter(movie.isFavourite()? Color.YELLOW:Color.GRAY); //set fav btn color

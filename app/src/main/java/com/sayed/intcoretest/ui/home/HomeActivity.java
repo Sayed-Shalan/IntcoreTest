@@ -123,7 +123,15 @@ public class HomeActivity extends BaseActivity {
         //set tabs titles
         binding.tabLayout.getTabAt(0).setText(getResources().getString(R.string.movies));
         binding.tabLayout.getTabAt(1).setText(getResources().getString(R.string.favourites));
+    }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return toggle.onOptionsItemSelected(item);
     }
 }

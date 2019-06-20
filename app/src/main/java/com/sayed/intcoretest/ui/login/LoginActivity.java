@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -12,6 +14,7 @@ import com.facebook.login.LoginResult;
 import com.sayed.intcoretest.R;
 import com.sayed.intcoretest.databinding.ActivityLoginBinding;
 import com.sayed.intcoretest.presenter.LoginPresenter;
+import com.sayed.intcoretest.repositories.LoginInteractor;
 import com.sayed.intcoretest.ui.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity implements LoginView, FacebookCallback<LoginResult> {
@@ -41,7 +44,14 @@ public class LoginActivity extends BaseActivity implements LoginView, FacebookCa
     private void initData() {
         callbackManager = CallbackManager.Factory.create();
         binding.btnFacebookLogin.registerCallback(callbackManager,this);
-        presenter=new LoginPresenter(this);
+        presenter=new LoginPresenter(this,new LoginInteractor());
+        checkIfUserLoggedIn();
+    }
+
+    //remove session
+    private void checkIfUserLoggedIn() {
+        AccessToken accessToken=AccessToken.getCurrentAccessToken();
+        if (accessToken!=null) AccessToken.setCurrentAccessToken(null);
     }
 
     /** Handle update view methods **/
@@ -63,7 +73,6 @@ public class LoginActivity extends BaseActivity implements LoginView, FacebookCa
 
     @Override
     public void onCancel() {
-        showError("You Canceled login request");
     }
 
     @Override

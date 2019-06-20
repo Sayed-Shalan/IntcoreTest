@@ -1,49 +1,39 @@
 package com.sayed.intcoretest.presenter;
 
-import android.os.Bundle;
-
-import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
+import com.sayed.intcoretest.repositories.LoginInteractor;
 import com.sayed.intcoretest.ui.login.LoginView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginPresenter {
+public class LoginPresenter implements LoginInteractor.OnLoginFinishedListener {
 
     //declare data
     private LoginView loginView;
+    private LoginInteractor loginInteractor;
 
     //Constructor
-    public LoginPresenter(LoginView loginView) {
+    public LoginPresenter(LoginView loginView,LoginInteractor loginInteractor) {
         this.loginView = loginView;
+        this.loginInteractor=loginInteractor;
     }
 
     //perform logic for login result
     public void validateCredentials(LoginResult loginResult){
         // App code
-        GraphRequest request = GraphRequest.newMeRequest(
-                loginResult.getAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        // Application code
-                        try {
-                            loginView.navigateToHome(response.getJSONObject().getString("email"));
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            loginView.showError();
-                        }
-                    }
-                });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,email,first_name,last_name,gender");
-        request.setParameters(parameters);
-        request.executeAsync();
+        loginInteractor.getGraphResponseData(loginResult,this);
 
     }
 
+    @Override
+    public void onSuccess(JSONObject object, GraphResponse response) {
+        try {
+            loginView.navigateToHome(object.getString("first_name").concat(" ").concat(object.getString("last_name")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            loginView.showError();
+        }
+    }
 }

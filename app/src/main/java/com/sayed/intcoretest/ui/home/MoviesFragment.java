@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,25 @@ public class MoviesFragment extends Fragment implements MoviesView{
     AdapterMovies.MoviesCallback moviesCallback= (movie, position) -> {
         if (movie.isFavourite()) moviesPresenter.addMovieToOfflineDB(movie);
         else moviesPresenter.deleteMovieFromOfflineDB(movie.getId());
+    };
+
+    //to handle if recycler view reached its bottom - handle pagination
+    RecyclerView.OnScrollListener onScrollListener=new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            //If scrolled at last then
+            if (isLastItemDisplaying(recyclerView)) {
+                //Calling the method get data again
+                getNextPage();
+            }
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            //Log.v("RECYCLER :"," ON SCROLLED ");
+        }
     };
 
     /**
@@ -81,6 +102,24 @@ public class MoviesFragment extends Fragment implements MoviesView{
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         binding.recyclerView.setAdapter(adapterMovies);
         adapterMovies.notifyDataSetChanged();
+        binding.recyclerView.addOnScrollListener(onScrollListener);
+    }
+
+    //This method would check that the recycler view scroll has reached the bottom or not
+    private boolean isLastItemDisplaying(RecyclerView recyclerView) {
+        if (recyclerView.getAdapter().getItemCount() != 0) {
+            int lastVisibleItemPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+            return lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1;
+        }
+        return false;
+    }
+
+    //request the next page
+    private void getNextPage(){
+        if (page<total_pages){
+            page++;
+            moviesPresenter.getMovies(page);
+        }
     }
 
     /**

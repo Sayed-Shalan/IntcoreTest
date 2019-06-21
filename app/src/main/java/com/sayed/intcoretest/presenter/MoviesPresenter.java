@@ -63,7 +63,7 @@ public class MoviesPresenter implements MoviesInteractor.MoviesListener {
     private boolean hitDbForSelectMovie(int id) {
         Cursor c = context.getContentResolver().
                 query(Uri.parse(MovieOfflineProvider.URL.concat("/").concat(String.valueOf(id))), MovieOfflineProvider.PROJECTION, null, null, null);
-        return c!=null&&!c.moveToFirst();
+        return c!=null&&c.moveToFirst();
 
     }
 

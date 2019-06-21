@@ -44,6 +44,12 @@
             android:authorities="com.facebook.app.FacebookContentProvider695081657609840"
             android:exported="true" />
 
+        <!--offline db content provider-->
+        <provider
+            android:name=".offline_db.MovieOfflineProvider"
+            android:exported="false"
+            android:authorities="com.sayed.intcore.test.provider"/>
+
        <!-- Meta Data -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

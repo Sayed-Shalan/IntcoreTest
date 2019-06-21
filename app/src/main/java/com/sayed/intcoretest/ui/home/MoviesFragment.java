@@ -40,7 +40,8 @@ public class MoviesFragment extends Fragment implements MoviesView{
 
     //on fav click
     AdapterMovies.MoviesCallback moviesCallback= (movie, position) -> {
-
+        if (movie.isFavourite()) moviesPresenter.addMovieToOfflineDB(movie);
+        else moviesPresenter.deleteMovieFromOfflineDB(movie.getId());
     };
 
     /**
@@ -69,7 +70,7 @@ public class MoviesFragment extends Fragment implements MoviesView{
         items=new ArrayList<>();
         binding.swipeRefresh.setOnRefreshListener(onRefreshListener);
         setupAdapter();
-        moviesPresenter=new MoviesPresenter(this,new MoviesInteractor());
+        moviesPresenter=new MoviesPresenter(this,new MoviesInteractor(),getActivity());
         moviesPresenter.getMovies(1);
     }
 

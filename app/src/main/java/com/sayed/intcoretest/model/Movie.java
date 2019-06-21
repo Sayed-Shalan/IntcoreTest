@@ -75,6 +75,9 @@ public class Movie implements Parcelable {
 
     public Movie() {
     }
+    public Movie(boolean isFav) {
+        setFavourite(isFav);
+    }
 
     @Override
     public int describeContents() {
